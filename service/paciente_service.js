@@ -12,7 +12,6 @@ function listarPaciente() {
 
     const pacientes = listaPaciente.map  (paciente => {
         let tempPaciente = paciente;
-        //console.log(listaPaciente)
 
         const consulta = listaAgenda.find(consulta => consulta.pacienteNome === paciente.nome);
         if (consulta) {
@@ -34,7 +33,7 @@ function listarPaciente() {
 
 
 function inserirPaciente(paciente) {
-    if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean' || paciente.email || paciente.senha) {
+    if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean') {
         throw { id: 400, msg: "Paciente sem dados corretos"}
     }
     const listaPaciente = pacienteRepository.listarPaciente();
@@ -73,7 +72,7 @@ function buscarPorIdPaciente(id) {
 
 
 function atualizarPaciente(id, paciente) {
-    if(paciente && paciente.nome && typeof paciente.consultaMarcada === 'boolean' && paciente.email) {
+    if(paciente && paciente.nome && typeof paciente.consultaMarcada === 'boolean') {
         const pacienteAtualizado = pacienteRepository.atualizarPaciente(id, paciente);
         if(pacienteAtualizado) {
             return pacienteAtualizado;

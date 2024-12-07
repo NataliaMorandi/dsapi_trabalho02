@@ -1,21 +1,14 @@
-let listaPaciente = [
-    {
-        "nome": "natalia",
-        "email": "natalia@gmail.com",
-        "senha": "12345",
-        "id": 1
-    }
-];
-let idGeradorPaciente = 2;
+let listaPaciente = [];
+let idGeradorPaciente = 1;
 
 // get lista
 function listarPaciente() {
-    return listaPaciente.map(paciente => removerCampoSenha(paciente));
+    return listaPaciente;
 }
 
 // post
 function inserirPaciente(paciente) {
-    if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean' || paciente.email || paciente.senha) {
+    if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean') {
         return;
     }
     paciente.id = idGeradorPaciente++;
@@ -23,38 +16,15 @@ function inserirPaciente(paciente) {
     return paciente;
 }
 
-function buscarPorEmail(email) {
-    return listaPaciente.find((paciente) => {
-        return paciente.email === email
-    })
-}
-
 // get id
 function buscarPorIdPaciente(paciente) {
     const pacienteEncontrado = listaPaciente.find(p => p.id === paciente.id);
-    //return pacienteEncontrado;
-    //Se encontrar usuário, retira a senha se não encontrar, retorna null ou undefined
-    if(pacienteEncontrado) {
-        return removerCampoSenha(pacienteEncontrado)
-    }
-    return null;
-}
-
-//retorna paciente sem expor a senha dele
-function removerCampoSenha(paciente) {
-    {
-        return {
-            id: paciente.id,
-            nome: paciente.nome,
-            consulta: paciente.consultaMarcada,
-            email: paciente.email
-        }
-    }
+    return pacienteEncontrado;
 }
 
 // put
 function atualizarPaciente(id, novoPaciente) {
-    if(!novoPaciente || !novoPaciente.nome || typeof novoPaciente.consultaMarcada !== 'boolean' || novoPaciente.email) {
+    if(!novoPaciente || !novoPaciente.nome || typeof novoPaciente.consultaMarcada !== 'boolean') {
         return; 
     }
     let indicePaciente = listaPaciente.findIndex(p => p.id === id);
@@ -83,7 +53,6 @@ function deletarPaciente(id) {
 module.exports = {
     listarPaciente,
     inserirPaciente,
-    buscarPorEmail,
     buscarPorIdPaciente,
     atualizarPaciente,
     deletarPaciente
