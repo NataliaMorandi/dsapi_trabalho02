@@ -6,9 +6,9 @@ const pacienteRepository = require('../repository/paciente_repository');
 const agendaRepository = require('../repository/agenda_repository');
 
 
-function listarPaciente() {
-    const listaAgenda = agendaRepository.listarAgenda();
-    const listaPaciente = pacienteRepository.listarPaciente();
+async function listarPaciente() {
+    const listaAgenda = await agendaRepository.listarAgenda();
+    const listaPaciente = await pacienteRepository.listarPaciente();
 
     const pacientes = listaPaciente.map  (paciente => {
         let tempPaciente = paciente;
@@ -32,11 +32,11 @@ function listarPaciente() {
 }
 
 
-function inserirPaciente(paciente) {
+async function inserirPaciente(paciente) {
     if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean') {
         throw { id: 400, msg: "Paciente sem dados corretos"}
     }
-    const listaPaciente = pacienteRepository.listarPaciente();
+    const listaPaciente = await pacienteRepository.listarPaciente();
 
     const nomeJaExiste = listaPaciente.some(
         p => p.nome === paciente.nome 
@@ -46,7 +46,7 @@ function inserirPaciente(paciente) {
         throw { id: 400, msg: "Nome já existe" };
     }
 
-    return pacienteRepository.inserirPaciente(paciente);
+    return await pacienteRepository.inserirPaciente(paciente);
 }
 
 

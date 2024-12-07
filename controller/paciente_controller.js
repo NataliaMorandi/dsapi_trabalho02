@@ -1,21 +1,21 @@
 const pacienteService = require('../service/paciente_service');
 
 // listar - get
-function listarPaciente(req, res) {
+async function listarPaciente(req, res) {
     try {
-        res.json(pacienteService.listarPaciente());
+        res.json(await pacienteService.listarPaciente());
       } catch(err) {
         res.status(err.id).json(err)
       }
 }
 
 // inserir - post
-function inserirPaciente(req, res) {
+async function inserirPaciente(req, res) {
     const paciente = req.body;
     try{
         // status de todos que sao padrao 200 nao precisa ser declarado
         // só declaramos o que é diferente, no caso o 201
-      const pacienteInserido = pacienteService.inserirPaciente(paciente);
+      const pacienteInserido = await pacienteService.inserirPaciente(paciente);
       res.status(201).json(pacienteInserido)
     }
     catch(err){

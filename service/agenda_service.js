@@ -6,9 +6,9 @@ const agendaRepository = require('../repository/agenda_repository');
 const pacienteRepository = require('../repository/paciente_repository');
 
 
-function listarAgenda() {
-    const listaAgenda = agendaRepository.listarAgenda();
-    const listaPaciente = pacienteRepository.listarPaciente();
+async function listarAgenda() {
+    const listaAgenda = await agendaRepository.listarAgenda();
+    const listaPaciente = await pacienteRepository.listarPaciente();
 
     const agendas = listaAgenda.map (consulta => {
         const paciente = listaPaciente.find(p => p.nome === consulta.pacienteNome);
@@ -27,13 +27,13 @@ function listarAgenda() {
 }
 
 
-function inserirAgenda(agenda) {
+async function inserirAgenda(agenda) {
     if(!agenda || !agenda.data || !agenda.pacienteNome) {
         throw { id: 400, msg: "Agenda sem dados corretos"}
     }
 
-    const listaAgenda = agendaRepository.listarAgenda();
-    const listaPaciente = pacienteRepository.listarPaciente();
+    const listaAgenda = await agendaRepository.listarAgenda();
+    const listaPaciente = await pacienteRepository.listarPaciente();
 
     const dataOcupada = listaAgenda.some(
         consulta => consulta.data === agenda.data 
@@ -46,12 +46,12 @@ function inserirAgenda(agenda) {
     const paciente = listaPaciente.find(p => p.nome === agenda.pacienteNome);
     if (paciente) {
         paciente.consultaMarcada = true;
-        pacienteRepository.atualizarPaciente(paciente.id, paciente);
+        await pacienteRepository.atualizarPaciente(paciente.id, paciente);
     } else {
         throw { id: 404, msg: "Paciente não encontrado" };
     }
 
-    return agendaRepository.inserirAgenda(agenda);
+    return await agendaRepository.inserirAgenda(agenda);
 }
 
 

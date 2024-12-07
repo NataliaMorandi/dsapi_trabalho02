@@ -2,13 +2,13 @@ let listaAgenda = [];
 let idGeradorAgenda = 2;
 
 // get lista
-function listarAgenda() {
+async function listarAgenda() {
     return listaAgenda; 
 }
 
 // post
 // ver se o horario está ocupado e retornar msg se estiver
-function inserirAgenda(agenda) {
+async function inserirAgenda(agenda) {
     if(!agenda || !agenda.data || !agenda.pacienteNome) {
         return;
     }

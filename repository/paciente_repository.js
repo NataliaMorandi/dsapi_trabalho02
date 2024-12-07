@@ -2,12 +2,12 @@ let listaPaciente = [];
 let idGeradorPaciente = 1;
 
 // get lista
-function listarPaciente() {
+async function listarPaciente() {
     return listaPaciente;
 }
 
 // post
-function inserirPaciente(paciente) {
+async function inserirPaciente(paciente) {
     if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean') {
         return;
     }

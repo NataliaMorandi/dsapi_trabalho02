@@ -1,21 +1,21 @@
 const agendaService = require('../service/agenda_service');
 
 // listar - get
-function listarAgenda(req, res) {
+async function listarAgenda(req, res) {
     try {
-        res.json(agendaService.listarAgenda());
+        res.json(await agendaService.listarAgenda());
       } catch(err) {
         res.status(err.id).json(err)
       }
 }
 
 // inserir - post
-function inserirAgenda(req, res) {
+async function inserirAgenda(req, res) {
     const agenda = req.body;
     try{
         // status de todos que sao padrao 200 nao precisa ser declarado
         // só declaramos o que é diferente, no caso o 201
-      const agendaInserida = agendaService.inserirAgenda(agenda);
+      const agendaInserida = await agendaService.inserirAgenda(agenda);
       res.status(201).json(agendaInserida)
     }
     catch(err){
