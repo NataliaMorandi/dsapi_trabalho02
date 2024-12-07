@@ -92,18 +92,18 @@ async function atualizarAgenda(id, agenda) {
 }
 
 
-function deletarAgenda(id) {
-    const agenda = agendaRepository.deletarAgenda(id);
+async function deletarAgenda(id) {
+    const agenda = await agendaRepository.deletarAgenda(id);
     if(!agenda) {
        throw {id: 404, msg: "Agenda não encontrada"};
     }
 
-    const listaPaciente = pacienteRepository.listarPaciente();
+    const listaPaciente = await pacienteRepository.listarPaciente();
     const paciente = listaPaciente.find(p => p.nome === agenda.pacienteNome);
 
     if (paciente) {
         paciente.consultaMarcada = false;
-        const pacienteAtualizado = pacienteRepository.atualizarPaciente(paciente.id, paciente);
+        const pacienteAtualizado = await pacienteRepository.atualizarPaciente(paciente.id, paciente);
 
     } else {
         throw { id: 404, msg: "Paciente não encontrado" };
@@ -112,8 +112,8 @@ function deletarAgenda(id) {
     return agenda;
 }
 
-function pesquisarPorDataAgenda(data) {
-    const listaAgenda = agendaRepository.listarAgenda();
+async function pesquisarPorDataAgenda(data) {
+    const listaAgenda = await agendaRepository.listarAgenda();
 
     const agenda = listaAgenda.find(consulta => consulta.data === data);
 

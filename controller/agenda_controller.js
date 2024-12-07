@@ -47,21 +47,21 @@ async function atualizarAgenda (req, res) {
   }
 
   //deletar
-function deletarAgenda(req, res) {
+async function deletarAgenda(req, res) {
   const id = +req.params.id;
   try {
-    res.json(agendaService.deletarAgenda(id));
+    res.json(await agendaService.deletarAgenda(id));
   } catch(err) {
     res.status(err.id).json(err)
   }
 }
 
 // pesquisar - get
-function pesquisarPorDataAgenda(req, res) {
+async function pesquisarPorDataAgenda(req, res) {
     const body = req.body;
     console.log(body)
     try {
-        res.json(agendaService.pesquisarPorDataAgenda(body.data));
+        res.json(await agendaService.pesquisarPorDataAgenda(body.data));
       } catch(err) {
         res.status(err.id).json(err)
       }

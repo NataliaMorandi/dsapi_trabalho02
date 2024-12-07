@@ -85,18 +85,18 @@ async function atualizarPaciente(id, paciente) {
 }
 
 
-function deletarPaciente(id) {
-    const paciente = pacienteRepository.deletarPaciente(id);
+async function deletarPaciente(id) {
+    const paciente = await pacienteRepository.deletarPaciente(id);
     if (!paciente) {
         throw { id: 404, msg: "Paciente não encontrado"}
     }
 
     if (paciente.consultaMarcada) {
-        const listaAgenda = agendaRepository.listarAgenda();
+        const listaAgenda = await agendaRepository.listarAgenda();
         const consulta = listaAgenda.find(consulta => consulta.pacienteNome === paciente.nome);
 
         if(consulta) {
-            agenda = agendaRepository.deletarAgenda(consulta.id);
+            agenda = await agendaRepository.deletarAgenda(consulta.id);
         } else {
             throw { id: 404, msg: "Agenda não encontrada" };
         }

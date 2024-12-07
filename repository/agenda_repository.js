@@ -44,7 +44,7 @@ async function atualizarAgenda(id, novaAgenda) {
 
 // delete
 // deleta a consulta e limpa o campo de consulta do paciente tambem
-function deletarAgenda(id) {
+async function deletarAgenda(id) {
     let indiceAgenda = listaAgenda.findIndex(agenda => agenda.id == id);
 
     if (indiceAgenda == -1) {

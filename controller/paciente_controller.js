@@ -48,10 +48,10 @@ async function atualizarPaciente (req, res) {
   }
 
   //deletar
-function deletarPaciente(req, res) {
+async function deletarPaciente(req, res) {
   const id = +req.params.id;
   try {
-    res.json(pacienteService.deletarPaciente(id));
+    res.json(await pacienteService.deletarPaciente(id));
   } catch(err) {
     res.status(err.id).json(err)
   }

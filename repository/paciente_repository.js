@@ -39,7 +39,7 @@ async function atualizarPaciente(id, novoPaciente) {
 }
 
 // delete
-function deletarPaciente(id) {
+async function deletarPaciente(id) {
     let indicePaciente = listaPaciente.findIndex(p => p.id === id);
 
     if (indicePaciente === -1) {
