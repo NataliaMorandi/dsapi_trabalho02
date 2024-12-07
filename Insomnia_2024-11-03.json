@@ -1,0 +1,394 @@
+{
+    "_type": "export",
+    "__export_format": 4,
+    "__export_date": "2024-11-04T01:00:57.641Z",
+    "__export_source": "insomnia.desktop.app:v10.1.1",
+    "resources": [
+        {
+            "_id": "req_14369b84e2f64f56a384e6a7cf037961",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730679313299,
+            "created": 1730679287287,
+            "url": "http://localhost:3000/api/pacientes",
+            "name": "listarPaciente",
+            "description": "",
+            "method":  "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730679287287,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "parentId": null,
+            "modified": 1730678169212,
+            "created": 1730678169212,
+            "name": "My Collection",
+            "description": "",
+            "scope": "collection",
+            "_type": "workspace"
+        },
+        {
+            "_id": "req_85e6a9ab2c0d4459aa10320c9f96b33e",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730679422450,
+            "created": 1730679339296,
+            "url": "http://localhost:3000/api/pacientes",
+            "name": "inserirPaciente",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"nome\": \"joao\",\n\t\"consultaMarcada\": false\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678957858.5,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_c0ed3ab43d474044aac0bd78e2a06259",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730679452057,
+            "created": 1730679438870,
+            "url": "http://localhost:3000/api/pacientes/1",
+            "name": "buscarPaciente",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678793144.25,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_93924223aeb74382a1f727d5bfb454ef",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730679541780,
+            "created": 1730679468743,
+            "url": "http://localhost:3000/api/pacientes/1",
+            "name": "atualizarPaciente",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"nome\": \"joao\",\n\t\"consultaMarcada\": false\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678710787.125,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_9e90c66c6b2842d8b6455b5a7b7295cc",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730679519030,
+            "created": 1730679510686,
+            "url": "http://localhost:3000/api/pacientes/1",
+            "name": "deletarPaciente",
+            "description": "",
+            "method": "DELETE",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678669608.5625,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_bd1ef82983ec472c976df3f079f8c5ec",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730678675105,
+            "created": 1730678182231,
+            "url": "http://localhost:3000/api/agendas",
+            "name": "listarAgenda",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678628430,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_1f4157b5b89143faa69f31affb3e1173",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730678676595,
+            "created": 1730678327241,
+            "url": "http://localhost:3000/api/agendas",
+            "name": "inserirAgenda",
+            "description": "",
+            "method": "POST",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"data\": \"03/11/2024\",\n\t\"pacienteNome\": \"joao\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678628380,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_1ce1d79e9bb34ee7bb614a38a08ed2ef",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730681738715,
+            "created": 1730678592412,
+            "url": "http://localhost:3000/api/agendas/1",
+            "name": "buscarAgenda",
+            "description": "",
+            "method": "GET",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678628355,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_05180a09caaf4621a528d2328cb60a87",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730678809630,
+            "created": 1730678553610,
+            "url": "http://localhost:3000/api/agendas/1",
+            "name": "atualizarAgenda",
+            "description": "",
+            "method": "PUT",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"data\": \"03/11/2024\",\n\t\"pacienteNome\": \"joao\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678553610,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_8c5e0c7f5dfa49b59692af1d9df159c5",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730678735410,
+            "created": 1730678628330,
+            "url": "http://localhost:3000/api/agendas/1",
+            "name": "deletarAgenda",
+            "description": "",
+            "method": "DELETE",
+            "body": {},
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678553510,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "req_bae63cc84c154a6a8a38af3ee400b822",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730681902547,
+            "created": 1730678739123,
+            "url": "http://localhost:3000/api/agendas/data",
+            "name": "pesquisarPorDataAgenda",
+            "description": "",
+            "method": "GET",
+            "body": {
+                "mimeType": "application/json",
+                "text": "{\n\t\"data\": \"04/11/2024\"\n}"
+            },
+            "parameters": [],
+            "headers": [
+                {
+                    "name": "Content-Type",
+                    "value": "application/json"
+                },
+                {
+                    "name": "User-Agent",
+                    "value": "insomnia/10.1.1"
+                }
+            ],
+            "authentication": {},
+            "metaSortKey": -1730678553410,
+            "isPrivate": false,
+            "pathParameters": [],
+            "settingStoreCookies": true,
+            "settingSendCookies": true,
+            "settingDisableRenderRequestBody": false,
+            "settingEncodeUrl": true,
+            "settingRebuildPath": true,
+            "settingFollowRedirects": "global",
+            "_type": "request"
+        },
+        {
+            "_id": "env_ea436424d47358de0a5412f306b2234cfd4e2a16",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730678169215,
+            "created": 1730678169215,
+            "name": "Base Environment",
+            "data": {},
+            "dataPropertyOrder": null,
+            "color": null,
+            "isPrivate": false,
+            "metaSortKey": 1730678169215,
+            "_type": "environment"
+        },
+        {
+            "_id": "jar_ea436424d47358de0a5412f306b2234cfd4e2a16",
+            "parentId": "wrk_c426c3ce5fbf41a8bc5c911bee2ebf12",
+            "modified": 1730678169218,
+            "created": 1730678169218,
+            "name": "Default Jar",
+            "cookies": [],
+            "_type": "cookie_jar"
+        }
+    ]
+}
