@@ -50,9 +50,9 @@ async function inserirPaciente(paciente) {
 }
 
 
-function buscarPorIdPaciente(id) {
-    const agendas = agendaRepository.listarAgenda();
-    const pacientes = pacienteRepository.listarPaciente();
+async function buscarPorIdPaciente(id) {
+    const agendas = await agendaRepository.listarAgenda();
+    const pacientes = await pacienteRepository.listarPaciente();
 
     const paciente = pacientes.find(p => p.id === id);
     if (!paciente) {
@@ -71,9 +71,9 @@ function buscarPorIdPaciente(id) {
 }
 
 
-function atualizarPaciente(id, paciente) {
+async function atualizarPaciente(id, paciente) {
     if(paciente && paciente.nome && typeof paciente.consultaMarcada === 'boolean') {
-        const pacienteAtualizado = pacienteRepository.atualizarPaciente(id, paciente);
+        const pacienteAtualizado = await pacienteRepository.atualizarPaciente(id, paciente);
         if(pacienteAtualizado) {
             return pacienteAtualizado;
         } else {

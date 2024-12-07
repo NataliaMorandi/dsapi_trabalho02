@@ -55,14 +55,14 @@ async function inserirAgenda(agenda) {
 }
 
 
-function buscarPorIdAgenda(id) {
+async function buscarPorIdAgenda(id) {
 
-    let agenda = agendaRepository.buscarPorIdAgenda(id);
+    let agenda = await agendaRepository.buscarPorIdAgenda(id);
     if (!agenda) {
         throw { id: 404, msg: "Agenda não encontrada"};
     }
 
-    const listaPaciente = pacienteRepository.listarPaciente();
+    const listaPaciente = await pacienteRepository.listarPaciente();
 
     const paciente = listaPaciente.find(p => p.nome === agenda.pacienteNome);
 
@@ -78,9 +78,9 @@ function buscarPorIdAgenda(id) {
 
 
 
-function atualizarAgenda(id, agenda) {
+async function atualizarAgenda(id, agenda) {
     if(agenda && agenda.data && agenda.pacienteNome) {
-        const agendaAtualizada = agendaRepository.atualizarAgenda(id, agenda);
+        const agendaAtualizada = await agendaRepository.atualizarAgenda(id, agenda);
         if(agendaAtualizada) {
             return agendaAtualizada;
         } else {

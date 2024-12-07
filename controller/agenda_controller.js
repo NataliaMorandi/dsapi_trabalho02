@@ -24,21 +24,21 @@ async function inserirAgenda(req, res) {
 }
 
 // buscar - get
-function buscarPorIdAgenda(req, res) {
+async function buscarPorIdAgenda(req, res) {
     const id = +req.params.id;
     try {
-      res.json(agendaService.buscarPorIdAgenda(id));
+      res.json(await agendaService.buscarPorIdAgenda(id));
     } catch(err) {
       res.status(err.id).json(err)
     }
   }
 
 // atualizar - put
-function atualizarAgenda (req, res) {
+async function atualizarAgenda (req, res) {
     const id = +req.params.id;
     const agenda = req.body;
     try{
-      const agendaAtualizada = agendaService.atualizarAgenda(id, agenda);
+      const agendaAtualizada = await agendaService.atualizarAgenda(id, agenda);
       res.json(agendaAtualizada)
     }
     catch(err){

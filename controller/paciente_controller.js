@@ -24,22 +24,22 @@ async function inserirPaciente(req, res) {
 }
 
 // buscar - get
-function buscarPorIdPaciente(req, res) {
+async function buscarPorIdPaciente(req, res) {
     // O + antes converte o valor para number (na URL vem como string)
     const id = +req.params.id;
     try {
-      res.json(pacienteService.buscarPorIdPaciente(id));
+      res.json(await pacienteService.buscarPorIdPaciente(id));
     } catch(err) {
       res.status(err.id).json(err)
     }
   }
 
 // atualizar - put
-function atualizarPaciente (req, res) {
+async function atualizarPaciente (req, res) {
     const id = +req.params.id;
     const paciente = req.body;
     try{
-      const pacienteAtualizado = pacienteService.atualizarPaciente(id, paciente);
+      const pacienteAtualizado = await pacienteService.atualizarPaciente(id, paciente);
       res.json(pacienteAtualizado)
     }
     catch(err){

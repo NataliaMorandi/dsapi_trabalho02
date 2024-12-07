@@ -17,13 +17,13 @@ async function inserirPaciente(paciente) {
 }
 
 // get id
-function buscarPorIdPaciente(paciente) {
+async function buscarPorIdPaciente(paciente) {
     const pacienteEncontrado = listaPaciente.find(p => p.id === paciente.id);
     return pacienteEncontrado;
 }
 
 // put
-function atualizarPaciente(id, novoPaciente) {
+async function atualizarPaciente(id, novoPaciente) {
     if(!novoPaciente || !novoPaciente.nome || typeof novoPaciente.consultaMarcada !== 'boolean') {
         return; 
     }

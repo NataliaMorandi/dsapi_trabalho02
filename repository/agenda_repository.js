@@ -1,5 +1,5 @@
 let listaAgenda = [];
-let idGeradorAgenda = 2;
+let idGeradorAgenda = 1;
 
 // get lista
 async function listarAgenda() {
@@ -19,13 +19,13 @@ async function inserirAgenda(agenda) {
 }
 
 // get id
-function buscarPorIdAgenda(id) {
+async function buscarPorIdAgenda(id) {
     const agendaEncontrada = listaAgenda.find(a => a.id === id);
     return agendaEncontrada;
 }
 
 // put
-function atualizarAgenda(id, novaAgenda) {
+async function atualizarAgenda(id, novaAgenda) {
     if(!novaAgenda || !novaAgenda.data || !novaAgenda.pacienteNome) {
         return;
     }
