@@ -52,12 +52,7 @@ async function inserirPaciente(paciente) {
 
 async function buscarPorIdPaciente(id) {
     const agendas = await agendaRepository.listarAgenda();
-    const pacientes = await pacienteRepository.listarPaciente();
-
-    const paciente = pacientes.find(p => p.id === id);
-    if (!paciente) {
-        throw { id: 404, msg: "Paciente não encontrado"}
-    }
+    const paciente = await pacienteRepository.buscarPorIdPaciente(id);
 
     if (paciente.consultaMarcada) {
         const consulta = agendas.find(a => a.pacienteNome === paciente.nome);

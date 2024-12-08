@@ -1,6 +1,16 @@
 let listaAgenda = [];
 let idGeradorAgenda = 1;
 
+const {Client} = require('pg')
+
+const config = {
+    user:'postgres',
+    password: '1234',
+    host: 'localhost',
+    port: 5432,
+    database: 'apitrabalho02'
+}
+
 // get lista
 async function listarAgenda() {
     return listaAgenda; 

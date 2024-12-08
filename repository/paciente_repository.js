@@ -49,37 +49,60 @@ async function inserirPaciente(paciente) {
 }
 
 // get id
-async function buscarPorIdPaciente(paciente) {
-    const pacienteEncontrado = listaPaciente.find(p => p.id === paciente.id);
-    return pacienteEncontrado;
+async function buscarPorIdPaciente(id) {
+
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const sql = "SELECT * FROM paciente WHERE id = $1";
+    const valores = [id];
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
+
+    const saida = res.rows; 
+    console.log(saida);
+    return saida;
 }
 
 // put
-async function atualizarPaciente(id, novoPaciente) {
-    if(!novoPaciente || !novoPaciente.nome || typeof novoPaciente.consultaMarcada !== 'boolean') {
+async function atualizarPaciente(id, paciente) {
+    if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean') {
         return; 
     }
-    let indicePaciente = listaPaciente.findIndex(p => p.id === id);
+    
+    const sql = "UPDATE paciente SET nome = $2, consultaMarcada = $3 WHERE id = $1 RETURNING *";
+    const valores = [id, paciente.nome, paciente.consultaMarcada];
+    
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
 
-    if (indicePaciente === -1) {
-        return;
-    }
-
-    novoPaciente.id = id;
-    listaPaciente[indicePaciente] = novoPaciente;
-    return listaPaciente[indicePaciente];
+    const saida = res.rows; 
+    console.log(saida);
+    return saida;    
+    
 }
 
 // delete
 async function deletarPaciente(id) {
-    let indicePaciente = listaPaciente.findIndex(p => p.id === id);
+    const sql = "DELETE FROM paciente WHERE id = $1 RETURNING *";
+    const valores = [id];
+    
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
 
-    if (indicePaciente === -1) {
-        return;
-    }
+    const saida = res.rows; 
+    console.log(saida);
+    return saida;   
 
-    const pacienteRemovido = listaPaciente.splice(indicePaciente, 1)[0];
-    return pacienteRemovido;
 }
 
 module.exports = {
