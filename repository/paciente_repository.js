@@ -1,9 +1,31 @@
 let listaPaciente = [];
 let idGeradorPaciente = 1;
 
+const {Client} = require('pg')
+
+const config = {
+    user:'postgres',
+    password: '1234',
+    host: 'localhost',
+    port: 5432,
+    database: 'apitrabalho02'
+}
+
 // get lista
 async function listarPaciente() {
-    return listaPaciente;
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const sql = "SELECT * FROM paciente ORDER BY(id)";
+    const res = await cliente.query(sql);
+    //finalizar conexão
+    await cliente.end();
+
+    const saida = res.rows; 
+    console.log(saida);
+    return saida;
+
 }
 
 // post

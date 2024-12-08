@@ -5,6 +5,8 @@ const agendaRouter = require('./router/agenda_router')
 const app = express()
 const PORT = 3000
 
+// funcao db
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
 
