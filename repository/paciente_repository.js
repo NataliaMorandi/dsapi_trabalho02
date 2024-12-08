@@ -33,9 +33,19 @@ async function inserirPaciente(paciente) {
     if(!paciente || !paciente.nome || typeof paciente.consultaMarcada !== 'boolean') {
         return;
     }
-    paciente.id = idGeradorPaciente++;
-    listaPaciente.push(paciente);
-    return paciente;
+
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const sql = "INSERT INTO paciente (nome, consultaMarcada) VALUES ($1, $2) RETURNING *";
+    const valores = [paciente.nome, paciente.consultaMarcada];
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
+
+    const saida = res.rows; 
+    console.log(saida);
+    return saida;
 }
 
 // get id
