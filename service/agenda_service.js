@@ -64,7 +64,13 @@ async function inserirAgenda(agenda) {
         throw { id: 404, msg: "Paciente não encontrado" };
     }
 
-    return await agendaRepository.inserirAgenda(agenda, paciente.id);
+    const novaAgenda = await agendaRepository.inserirAgenda(agenda, paciente.id);
+    return {
+        data: novaAgenda.data,
+        id: novaAgenda.id,
+        id_paciente: novaAgenda.id_paciente,
+        pacienteNome: paciente.nome
+    };
 }
 
 

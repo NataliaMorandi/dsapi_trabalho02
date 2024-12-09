@@ -48,9 +48,10 @@ async function inserirAgenda(agenda, id_paciente) {
     if (!agenda || !agenda.data || !agenda.pacienteNome) {
         return;
     }
+    console.log(id_paciente);
 
     const sql = "INSERT INTO agenda (data, id_paciente) VALUES ($1, $2) RETURNING *";
-    const valores = [data, id_paciente];
+    const valores = [agenda.data, id_paciente];
 
     const cliente = new Client(config);
     // Conexão
