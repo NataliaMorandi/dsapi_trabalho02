@@ -1,5 +1,5 @@
-let listaAgenda = [];
-let idGeradorAgenda = 1;
+//let listaAgenda = [];
+//let idGeradorAgenda = 1;
 
 const {Client} = require('pg')
 
@@ -13,19 +13,44 @@ const config = {
 
 // get lista
 async function listarAgenda() {
-    return listaAgenda; 
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const sql =  `
+    SELECT a.id, a.data, p.nome AS pacienteNome, p.consultaMarcada
+    FROM agenda a
+    JOIN paciente p ON a.pacienteNome = p.nome
+    ORDER BY a.id
+`;
+//"SELECT agenda.id, agenda.data, agenda.pacienteNome, paciente.nome FROM agenda JOIN paciente ON agenda.pacienteNome = paciente.nome ORDER BY id";
+    const res = await cliente.query(sql);
+    //finalizar conexão
+    await cliente.end();
+
+    const saida = res.rows; 
+    console.log(saida);
+    return saida;
 }
 
 // post
 // ver se o horario está ocupado e retornar msg se estiver
 async function inserirAgenda(agenda) {
-    if(!agenda || !agenda.data || !agenda.pacienteNome) {
+    if (!agenda || !agenda.data || !agenda.pacienteNome) {
         return;
     }
 
-    agenda.id = idGeradorAgenda++;
-    listaAgenda.push(agenda);
-    return agenda;
+    const sql = "INSERT INTO agenda (data, pacienteNome) VALUES ($1, $2) RETURNING *";
+    const valores = [agenda.data, agenda.pacienteNome];
+
+    const cliente = new Client(config);
+    // Conexão
+    await cliente.connect();
+    // Query
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
+
+    return res.rows[0];
 }
 
 // get id
