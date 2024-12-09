@@ -18,30 +18,39 @@ async function listarAgenda() {
     await cliente.connect();
     //query
     const sql =  `
-    SELECT a.id, a.data, p.nome AS pacienteNome, p.consultaMarcada
-    FROM agenda a
-    JOIN paciente p ON a.pacienteNome = p.nome
-    ORDER BY a.id
+    SELECT 
+        Agenda.id AS agenda_id,
+        Agenda.data AS agenda_date,
+        Paciente.id AS paciente_id,
+        Paciente.nome AS paciente_nome,
+        Paciente.consultaMarcada AS consulta_marcada
+    FROM 
+        Agenda
+    JOIN 
+        Paciente
+    ON 
+        Agenda.id_paciente = Paciente.id;
 `;
-//"SELECT agenda.id, agenda.data, agenda.pacienteNome, paciente.nome FROM agenda JOIN paciente ON agenda.pacienteNome = paciente.nome ORDER BY id";
+
     const res = await cliente.query(sql);
     //finalizar conexão
     await cliente.end();
 
-    const saida = res.rows; 
-    console.log(saida);
-    return saida;
+    const response = res.rows; 
+
+    console.log(response);
+    return response;
 }
 
 // post
 // ver se o horario está ocupado e retornar msg se estiver
-async function inserirAgenda(agenda) {
+async function inserirAgenda(agenda, id_paciente) {
     if (!agenda || !agenda.data || !agenda.pacienteNome) {
         return;
     }
 
-    const sql = "INSERT INTO agenda (data, pacienteNome) VALUES ($1, $2) RETURNING *";
-    const valores = [agenda.data, agenda.pacienteNome];
+    const sql = "INSERT INTO agenda (data, id_paciente) VALUES ($1, $2) RETURNING *";
+    const valores = [data, id_paciente];
 
     const cliente = new Client(config);
     // Conexão

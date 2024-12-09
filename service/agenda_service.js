@@ -8,16 +8,29 @@ const pacienteRepository = require('../repository/paciente_repository');
 
 async function listarAgenda() {
     const listaAgenda = await agendaRepository.listarAgenda();
-    const listaPaciente = await pacienteRepository.listarPaciente();
+    console.log('------------');
+    console.log(listaAgenda);
+    // const listaPaciente = await pacienteRepository.listarPaciente();
 
-    const agendas = listaAgenda.map (consulta => {
-        const paciente = listaPaciente.find(p => p.nome === consulta.pacienteNome);
-            return {
-                id: consulta.id,
-                data: consulta.data,
-                paciente: paciente
-            };
-    });
+    // const agendas = listaAgenda.map (consulta => {
+    //     const paciente = listaPaciente.find(p => p.nome === consulta.pacienteNome);
+    //         return {
+    //             id: consulta.id,
+    //             data: consulta.data,
+    //             paciente: paciente
+    //         };
+    // });
+
+    const agendas = listaAgenda.map(item => ({
+        id: item.agenda_id,
+        data: item.agenda_date, 
+        paciente: {
+          id: item.paciente_id,
+          nome: item.paciente_nome,
+          consultaMarcada: item.consulta_marcada
+        }
+      }));
+
 
     if (agendas.length !== 0) {
         return agendas;
@@ -51,7 +64,7 @@ async function inserirAgenda(agenda) {
         throw { id: 404, msg: "Paciente não encontrado" };
     }
 
-    return await agendaRepository.inserirAgenda(agenda);
+    return await agendaRepository.inserirAgenda(agenda, paciente.id);
 }
 
 

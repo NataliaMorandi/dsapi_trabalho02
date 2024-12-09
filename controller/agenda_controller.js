@@ -5,6 +5,7 @@ async function listarAgenda(req, res) {
     try {
         res.json(await agendaService.listarAgenda());
       } catch(err) {
+        console.log(err)
         res.status(err.id).json(err)
       }
 }
