@@ -100,11 +100,15 @@ async function deletarAgenda(id) {
     }
 
     const paciente = await pacienteRepository.buscarPorIdPaciente(agenda.id_paciente);
-    
+    console.log('Paciente encontrado');
+    console.log(paciente);
+
     if (paciente) {
         paciente.consultaMarcada = false;
         const pacienteAtualizado = await pacienteRepository.atualizarPaciente(paciente.id, paciente);
-
+        console.log('Paciente atualizado: ${pacienteAtualizado}');
+        console.log(pacienteAtualizado);
+        
     } else {
         throw { id: 404, msg: "Paciente não encontrado" };
     }

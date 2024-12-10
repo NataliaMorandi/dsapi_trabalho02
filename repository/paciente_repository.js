@@ -50,6 +50,10 @@ async function inserirPaciente(paciente) {
 
 // get id
 async function buscarPorIdPaciente(id) {
+    console.log('buscar paciente id:' + id);
+    console.log(id);
+    
+    
 
     const cliente = new Client(config);
     //conexão
@@ -60,9 +64,7 @@ async function buscarPorIdPaciente(id) {
     const res = await cliente.query(sql, valores);
     await cliente.end();
 
-    const saida = res.rows; 
-    console.log(saida);
-    return saida;
+    return res.rows[0];
 }
 
 // put

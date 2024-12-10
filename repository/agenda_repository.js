@@ -151,7 +151,6 @@ async function atualizarAgenda(id, novaAgenda) {
 // delete
 // deleta a consulta e limpa o campo de consulta do paciente tambem
 async function deletarAgenda(id) {
-    console.log(id);
     const sql = "DELETE FROM agenda WHERE id = $1 RETURNING *";
     const valores = [id];
     
@@ -162,11 +161,7 @@ async function deletarAgenda(id) {
     const res = await cliente.query(sql, valores);
     await cliente.end();
 
-    const saida = res.rows; 
-    console.log('teste');
-    
-    console.log(saida);
-    
+    const saida = res.rows[0];     
     return saida;
 }
 
