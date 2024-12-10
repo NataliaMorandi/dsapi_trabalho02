@@ -119,7 +119,14 @@ async function buscarPorIdAgenda(id) {
 }
 
 // put
-async function atualizarAgenda(id, novaAgenda) {
+async function atualizarAgenda(idAgenda, novaAgenda) {
+
+    console.log('Atualizar agenda');
+    console.log(idAgenda);
+    console.log(novaAgenda);
+    
+    
+    
     if(!novaAgenda || !novaAgenda.data || !novaAgenda.pacienteNome) {
         return;
     }
@@ -128,23 +135,13 @@ async function atualizarAgenda(id, novaAgenda) {
     //conexão
     await cliente.connect();
 
-    // const sqlPaciente = "SELECT id FROM paciente WHERE nome = $1";
-    // const resPaciente = await cliente.query(sqlPaciente, [novaAgenda.pacienteNome]);
-    // const idPaciente = resPaciente.rows[0].id;
-
     const sqlAgenda = "UPDATE agenda SET data = $2, id_paciente = $3 WHERE id = $1 RETURNING *";
-    const valoresAgenda = [id, novaAgenda.data, idPaciente];
+    const valoresAgenda = [idAgenda, novaAgenda.data, novaAgenda.id_paciente];
     const resAgenda = await cliente.query(sqlAgenda, valoresAgenda);
     
-    
-    //query
-    //const res = await cliente.query(sql, valores);
     await cliente.end();
     return resAgenda.rows[0];
 
-    // const saida = res.rows; 
-    // console.log(saida);
-    // return saida; 
 }
 
 
