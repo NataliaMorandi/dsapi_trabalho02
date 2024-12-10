@@ -10,30 +10,9 @@ async function listarAgenda() {
     const listaAgenda = await agendaRepository.listarAgenda();
     console.log('------------');
     console.log(listaAgenda);
-    // const listaPaciente = await pacienteRepository.listarPaciente();
 
-    // const agendas = listaAgenda.map (consulta => {
-    //     const paciente = listaPaciente.find(p => p.nome === consulta.pacienteNome);
-    //         return {
-    //             id: consulta.id,
-    //             data: consulta.data,
-    //             paciente: paciente
-    //         };
-    // });
-
-    const agendas = listaAgenda.map(item => ({
-        id: item.agenda_id,
-        data: item.agenda_date, 
-        paciente: {
-          id: item.paciente_id,
-          nome: item.paciente_nome,
-          consultaMarcada: item.consulta_marcada
-        }
-      }));
-
-
-    if (agendas.length !== 0) {
-        return agendas;
+    if (listaAgenda.length !== 0) {
+        return listaAgenda;
     } else {
         throw { id: 404, msg: "Nenhuma agenda registrada" };
     }
@@ -83,7 +62,7 @@ async function buscarPorIdAgenda(id) {
     }
 
     const listaPaciente = await pacienteRepository.listarPaciente();
-
+    
     const paciente = listaPaciente.find(p => p.nome === agenda.pacienteNome);
 
     if(paciente) {
@@ -94,6 +73,7 @@ async function buscarPorIdAgenda(id) {
         };
     }
     return agenda;
+
 }
 
 

@@ -36,10 +36,20 @@ async function listarAgenda() {
     //finalizar conexão
     await cliente.end();
 
-    const response = res.rows; 
+    const response = res.rows;
+    
+    const agendas = response.map(item => ({
+        id: item.agenda_id,
+        data: item.agenda_date, 
+        paciente: {
+          id: item.paciente_id,
+          nome: item.paciente_nome,
+          consultaMarcada: item.consulta_marcada
+        }
+      }));
 
-    console.log(response);
-    return response;
+    console.log(agendas);
+    return agendas;
 }
 
 // post
@@ -65,8 +75,47 @@ async function inserirAgenda(agenda, id_paciente) {
 
 // get id
 async function buscarPorIdAgenda(id) {
-    const agendaEncontrada = listaAgenda.find(a => a.id === id);
-    return agendaEncontrada;
+    // const agendaEncontrada = listaAgenda.find(a => a.id === id);
+    // return agendaEncontrada;
+
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const sql =  `
+    SELECT 
+        Agenda.id AS agenda_id,
+        Agenda.data AS agenda_date,
+        Paciente.id AS paciente_id,
+        Paciente.nome AS paciente_nome,
+        Paciente.consultaMarcada AS consulta_marcada
+    FROM 
+        Agenda
+    JOIN 
+        Paciente
+    ON 
+        Agenda.id_paciente = Paciente.id
+    WHERE agenda.id = $1
+`;
+    const valores = [id];
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
+
+    const response = res.rows;
+    
+    const agendas = response.map(item => ({
+        id: item.agenda_id,
+        data: item.agenda_date, 
+        paciente: {
+          id: item.paciente_id,
+          nome: item.paciente_nome,
+          consultaMarcada: item.consulta_marcada
+        }
+      }));
+
+    console.log(agendas);
+    return agendas;
+
 }
 
 // put
@@ -75,15 +124,27 @@ async function atualizarAgenda(id, novaAgenda) {
         return;
     }
 
-    let indiceAgenda = listaAgenda.findIndex(agenda => agenda.id == id);
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
 
-    if (indiceAgenda == -1) {
-        return;
-    }
+    const sqlPaciente = "SELECT id FROM paciente WHERE nome = $1";
+    const resPaciente = await cliente.query(sqlPaciente, [novaAgenda.pacienteNome]);
+    const idPaciente = resPaciente.rows[0].id;
 
-    novaAgenda.id = id;
-    listaAgenda[indiceAgenda] = novaAgenda;
-    return listaAgenda[indiceAgenda];
+    const sqlAgenda = "UPDATE agenda SET data = $2, id_paciente = $3 WHERE id = $1 RETURNING *";
+    const valoresAgenda = [id, novaAgenda.data, idPaciente];
+    const resAgenda = await cliente.query(sqlAgenda, valoresAgenda);
+    
+    
+    //query
+    //const res = await cliente.query(sql, valores);
+    await cliente.end();
+    return resAgenda.rows[0];
+
+    // const saida = res.rows; 
+    // console.log(saida);
+    // return saida; 
 }
 
 
