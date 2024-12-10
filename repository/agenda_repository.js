@@ -128,9 +128,9 @@ async function atualizarAgenda(id, novaAgenda) {
     //conexão
     await cliente.connect();
 
-    const sqlPaciente = "SELECT id FROM paciente WHERE nome = $1";
-    const resPaciente = await cliente.query(sqlPaciente, [novaAgenda.pacienteNome]);
-    const idPaciente = resPaciente.rows[0].id;
+    // const sqlPaciente = "SELECT id FROM paciente WHERE nome = $1";
+    // const resPaciente = await cliente.query(sqlPaciente, [novaAgenda.pacienteNome]);
+    // const idPaciente = resPaciente.rows[0].id;
 
     const sqlAgenda = "UPDATE agenda SET data = $2, id_paciente = $3 WHERE id = $1 RETURNING *";
     const valoresAgenda = [id, novaAgenda.data, idPaciente];
@@ -151,14 +151,23 @@ async function atualizarAgenda(id, novaAgenda) {
 // delete
 // deleta a consulta e limpa o campo de consulta do paciente tambem
 async function deletarAgenda(id) {
-    let indiceAgenda = listaAgenda.findIndex(agenda => agenda.id == id);
+    console.log(id);
+    const sql = "DELETE FROM agenda WHERE id = $1 RETURNING *";
+    const valores = [id];
+    
+    const cliente = new Client(config);
+    //conexão
+    await cliente.connect();
+    //query
+    const res = await cliente.query(sql, valores);
+    await cliente.end();
 
-    if (indiceAgenda == -1) {
-        return;
-    }
-
-    const agendaRemovida = listaAgenda.splice(indiceAgenda, 1)[0];
-    return agendaRemovida;
+    const saida = res.rows; 
+    console.log('teste');
+    
+    console.log(saida);
+    
+    return saida;
 }
 
 module.exports = {

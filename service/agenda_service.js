@@ -94,13 +94,13 @@ async function atualizarAgenda(id, agenda) {
 
 async function deletarAgenda(id) {
     const agenda = await agendaRepository.deletarAgenda(id);
+    
     if(!agenda) {
        throw {id: 404, msg: "Agenda não encontrada"};
     }
 
-    const listaPaciente = await pacienteRepository.listarPaciente();
-    const paciente = listaPaciente.find(p => p.nome === agenda.pacienteNome);
-
+    const paciente = await pacienteRepository.buscarPorIdPaciente(agenda.id_paciente);
+    
     if (paciente) {
         paciente.consultaMarcada = false;
         const pacienteAtualizado = await pacienteRepository.atualizarPaciente(paciente.id, paciente);
