@@ -24,11 +24,11 @@ async function listarPaciente() {
         return tempPaciente;
     });
 
-    if (pacientes.length !== 0) {
-        return pacientes;
-    } else {
-        throw { id: 404, msg: "Nenhum paciente registrado" };
-    }
+    // if (pacientes.length !== 0) {
+    return pacientes;
+    // } else {
+    //     throw { id: 404, msg: "Nenhum paciente registrado" };
+    // }
 }
 
 
@@ -54,6 +54,10 @@ async function buscarPorIdPaciente(id) {
     const agendas = await agendaRepository.listarAgenda();
     const paciente = await pacienteRepository.buscarPorIdPaciente(id);
 
+    if (!paciente) {
+        throw { id: 404, msg: "Paciente não encontrado"}
+    }
+
     if (paciente.consultaMarcada) {
         const consulta = agendas.find(a => a.pacienteNome === paciente.nome);
         paciente.consulta = {
@@ -67,7 +71,10 @@ async function buscarPorIdPaciente(id) {
 
 
 async function atualizarPaciente(id, paciente) {
-    if(paciente && paciente.nome && typeof paciente.consultaMarcada === 'boolean') {
+    if(paciente && paciente.nome) {
+        if (paciente.consultaMarcada){
+            throw {id: 400, msg: "Proibido alterar status da consulta"};
+        }
         const pacienteAtualizado = await pacienteRepository.atualizarPaciente(id, paciente);
         if(pacienteAtualizado) {
             return pacienteAtualizado;
