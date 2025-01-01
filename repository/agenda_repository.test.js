@@ -16,7 +16,6 @@ test('Quando listar, deve retornar uma lista vazia no inicio', () => {
     expect(agendaRepository.listarAgenda()).toEqual([]);
 });
 
-
 // Cenário de exceção para listarAgenda
 test('Quando listar apos inserçoes, deve retornar uma lista com agendas', () => {
     agendaRepository.inserirAgenda({ 
