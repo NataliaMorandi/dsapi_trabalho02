@@ -5,7 +5,6 @@
 const pacienteRepository = require('../repository/paciente_repository');
 const agendaRepository = require('../repository/agenda_repository');
 
-
 async function listarPaciente() {
     const listaAgenda = await agendaRepository.listarAgenda();
     const listaPaciente = await pacienteRepository.listarPaciente();
